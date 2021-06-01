@@ -16,7 +16,7 @@
 
 Java, Spring Boot, Gradle, MySQL, Redis
 
-### 코드 원본 Repo Link ###
+### ⛓️ Repo 원본 Link ###
 https://github.com/f-lab-edu/cat-caring-community
 
 ### 📌 프로젝트 중점 사항
