@@ -36,10 +36,8 @@ https://github.com/f-lab-edu/cat-caring-community
 - 게시판 정보 보기 권한
 
 ### 📁 프로젝트 ISSUE 
-----------
 | ISSUE | 링크 |
 | 기술스택 사용 여부 | https://www.notion.so/ssunsoolzip/7aa03f6fda434309bff31ba59ec6b3dc |
----------
 
 ### ⛓️ Github PR 방식
 
