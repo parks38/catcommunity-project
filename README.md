@@ -39,6 +39,7 @@ https://github.com/f-lab-edu/cat-caring-community
 | ISSUE | 링크 |
 |-----|------|
 | 기술스택 사용 여부 | https://www.notion.so/ssunsoolzip/7aa03f6fda434309bff31ba59ec6b3dc |
+| spring AOP | https://www.notion.so/ssunsoolzip/AOP-checkLoginAndProcessResult-Transactional-9db40e64bb6e44ebaad3f07651fd3905 |
 
 ### ⛓️ Github PR 방식
 
