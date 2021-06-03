@@ -15,8 +15,8 @@
 Java, Spring Boot, Gradle, MySQL, Mybatis
 
 ### ⛓️ Repo 원본 Link ###
-PR/ commit message 확인 : https://github.com/f-lab-edu/cat-caring-community
-프로젝트 상세 내용 정리 : https://www.notion.so/ssunsoolzip/e092e57afb0f49119af6597f8864c2a8
+- PR/ commit message 확인 : https://github.com/f-lab-edu/cat-caring-community
+- 프로젝트 상세 내용 정리 : https://www.notion.so/ssunsoolzip/e092e57afb0f49119af6597f8864c2a8
 
 ### 📌 프로젝트 중점 사항
 
