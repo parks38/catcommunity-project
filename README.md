@@ -38,6 +38,7 @@ Java, Spring Boot, Gradle, MySQL, Mybatis
 |-----|------|
 | 기술스택 사용 여부 | https://www.notion.so/ssunsoolzip/7aa03f6fda434309bff31ba59ec6b3dc |
 | spring AOP | https://www.notion.so/ssunsoolzip/AOP-checkLoginAndProcessResult-Transactional-9db40e64bb6e44ebaad3f07651fd3905 |
+| Web MVC |https://www.notion.so/ssunsoolzip/Spring-Web-MVC-74693deeee7f4a45955e6399ec030420 |
 
 ### ⛓️ Github PR 방식
 
