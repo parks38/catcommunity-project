@@ -1,13 +1,11 @@
 package com.project.catcaring.service;
 
-import com.project.catcaring.domain.Location;
+import com.project.catcaring.domain.Address;
 import com.project.catcaring.domain.Post;
-import com.project.catcaring.domain.Post.PostStatus;
 import com.project.catcaring.domain.Tag;
-import com.project.catcaring.domain.user.Authority;
+import com.project.catcaring.domain.Authority;
 import com.project.catcaring.dto.post.PostInfoRequest;
 import com.project.catcaring.mapper.PostMapper;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,7 @@ public class PostServiceImpl implements PostService{
     postMapper.insertPost(Post.generate(postInfoRequest, userId));
     Long postId = postMapper.findLastPostByUserId(userId);
 
-    Location postLocation = buildLocationInfo(postInfoRequest, postId);
+    Address postLocation = buildLocationInfo(postInfoRequest, postId);
     postMapper.insertLocation(postLocation);
 
     if(postInfoRequest.getTagNames() != null) {
@@ -35,14 +33,14 @@ public class PostServiceImpl implements PostService{
 
   }
 
-  private Location buildLocationInfo(PostInfoRequest postInfoRequest, Long postId) {
+  private Address buildLocationInfo(PostInfoRequest postInfoRequest, Long postId) {
     Authority authority = postInfoRequest.getLocationAuthorityCode();
 
     if(authority == null) {
       authority = Authority.ACTIVE_MEM;
     }
 
-    return Location.builder().postId(postId).location(postInfoRequest.getLocation())
+    return Address.builder().postId(postId).location(postInfoRequest.getLocation())
             .locationDetail(postInfoRequest.getLocationDetail())
             .authorityCode(authority).build();
   }

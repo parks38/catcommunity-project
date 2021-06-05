@@ -8,7 +8,7 @@
     VALUES (#{userId}, #{title}, #{content}, #{authorityCode}, #{status}, NOW())
   </insert>
 
-  <insert id="insertLocation" parameterType="com.project.catcaring.domain.Location">
+  <insert id="insertLocation" parameterType="com.project.catcaring.domain.Address">
     INSERT INTO location(post_id, location, location_detail, authority_code)
     VALUES (#{postId}, #{location}, #{locationDetail}, #{authorityCode})
   </insert>
@@ -23,6 +23,4 @@
     WHERE user_id = #{userId}
     ORDER BY created_at DESC LIMIT 1
   </select>
-
-
 </mapper>

@@ -1,7 +1,9 @@
 package com.project.catcaring.dto.post;
 
-import com.project.catcaring.domain.user.Authority;
-import com.project.catcaring.domain.user.User.Address;
+import com.project.catcaring.domain.Address;
+import com.project.catcaring.domain.Authority;
+import com.project.catcaring.domain.Address;
+import com.project.catcaring.domain.User.Location;
 import java.util.List;
 import lombok.Getter;
 import reactor.util.annotation.Nullable;
@@ -14,7 +16,7 @@ public class PostInfoRequest {
   private Authority postAuthorityCode;
   @Nullable
   private List<String> tagNames;
-  private Address location;
+  private Location location;
   @Nullable
   private String locationDetail;
   @Nullable
