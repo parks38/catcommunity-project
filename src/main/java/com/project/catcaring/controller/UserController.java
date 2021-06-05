@@ -1,11 +1,13 @@
 package com.project.catcaring.controller;
 
-import static com.project.catcaring.handler.HttpResponses.*;
+import static com.project.catcaring.error.HttpResponses.RESPONSE_CREATED;
+import static com.project.catcaring.error.HttpResponses.RESPONSE_OK;
 
-import com.project.catcaring.domain.user.User;
-import com.project.catcaring.dto.user.UserInfoRequest;
-import com.project.catcaring.dto.user.UserLoginRequest;
-import com.project.catcaring.handler.LoginErrorException;
+import com.project.catcaring.aop.annotation.CheckLogin;
+import com.project.catcaring.domain.User;
+import com.project.catcaring.dto.user.request.UserInfoRequest;
+import com.project.catcaring.dto.user.request.UserLoginRequest;
+import com.project.catcaring.error.LoginErrorException;
 import com.project.catcaring.service.user.LoginSessionService;
 import com.project.catcaring.service.user.UserServiceImpl;
 import java.util.Optional;
@@ -38,20 +40,17 @@ public class UserController {
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody @NonNull UserLoginRequest userLoginRequest) {
     Optional<User> user = userServiceImpl.login(userLoginRequest.getUsername(), userLoginRequest.getPassword());
-    if(user.isPresent()) {
+    if (user.isPresent()) {
       loginSessionService.loginUser(user.get().getId());
-      return new ResponseEntity<>("LOGIN COMPLETED", HttpStatus.OK);
+      return RESPONSE_OK;
     }
     throw new LoginErrorException(HttpStatus.NOT_FOUND);
   }
 
   @GetMapping("/logout")
+  @CheckLogin
   public ResponseEntity<String> logout() {
-    try {
-      loginSessionService.logoutUser();
-      return new ResponseEntity<>("LOGOUT COMPLETED", HttpStatus.OK);
-    } catch (RuntimeException e) {
-      return RESPONSE_UNAUTHORIZED;
-    }
+    loginSessionService.logoutUser();
+    return RESPONSE_OK;
   }
 }
