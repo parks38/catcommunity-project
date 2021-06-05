@@ -3,36 +3,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "com.project.catcaring.mapper.UserMapper">
 
-  <insert id="insertUser" parameterType="com.project.catcaring.domain.user.User">
+  <insert id="insertUser" parameterType="com.project.catcaring.domain.User">
     INSERT INTO USER(username, password, email, full_name, location, authority_code, status)
-    VALUES(#{username}, #{password}, #{email}, #{fullName}, #{location}, #{authorityCode}, #{status})
+    VALUES(#{username}, #{password}, #{email}, #{fullName}, #{location}, #{memberShipStatus}, #{userStatus})
   </insert>
 
-  <select id="isUniqueId" resultType="boolean">
+  <select id="isUniqueUsername" resultType="boolean">
     SELECT EXISTS
-             (SELECT username FROM USER WHERE username = #{username})
+    (SELECT username FROM USER WHERE username = #{username})
   </select>
 
-  <select id = "findByUsername" resultType="com.project.catcaring.domain.user.User">
+  <select id = "findByUsername" resultType="com.project.catcaring.domain.User">
     SELECT * FROM USER WHERE username = #{username}
-        AND status != 'DELETE'
+    AND status != 'DELETE'
   </select>
 
-  <select id = "findByUserId" resultType="com.project.catcaring.domain.user.User">
+  <select id = "findByUserId" resultType="com.project.catcaring.domain.User">
     SELECT * FROM USER WHERE id = #{userId}
-                         AND status != 'DELETE'
+    AND status != 'DELETE'
   </select>
 
   <update id = "deleteUser">
     update user set
-        status = 'DELETE', updated_at = NOW()
-        where id = #{userId}
+    status = 'DELETE', updated_at = NOW()
+    where id = #{userId}
   </update>
 
-  <update id = "update" parameterType="com.project.catcaring.domain.user.User">
+  <update id = "update" parameterType="com.project.catcaring.domain.User">
     update user set
-                  full_name = #{fullName}, password = #{password},
-                  location = #{location}, updated_at = NOW()
+    full_name = #{fullName}, password = #{password},
+    location = #{location}, updated_at = NOW()
     where id = #{id}
   </update>
 
