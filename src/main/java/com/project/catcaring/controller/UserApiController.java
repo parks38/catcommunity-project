@@ -1,10 +1,10 @@
 package com.project.catcaring.controller;
 
-import static com.project.catcaring.handler.HttpResponses.*;
+import static com.project.catcaring.error.HttpResponses.*;
 
-import com.project.catcaring.aop.annotation.CheckUserProcess;
-import com.project.catcaring.domain.user.User;
-import com.project.catcaring.dto.user.UserChangeRequest;
+import com.project.catcaring.aop.annotation.CheckLoginAndResult;
+import com.project.catcaring.domain.User;
+import com.project.catcaring.dto.user.request.UserChangeRequest;
 import com.project.catcaring.service.user.LoginSessionService;
 import com.project.catcaring.service.user.UserApiServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -27,13 +27,13 @@ public class UserApiController {
   private final LoginSessionService loginSessionService;
 
   @GetMapping
-  @CheckUserProcess
+  @CheckLoginAndResult
   public ResponseEntity<User> getUserInfo() {
     return ResponseEntity.ok(userServiceImpl.getUserInfo(loginSessionService.getCurrentUserId()));
   }
 
   @DeleteMapping
-  @CheckUserProcess
+  @CheckLoginAndResult
   public ResponseEntity<String> deleteUser() {
       userServiceImpl.deleteUser(loginSessionService.getCurrentUserId());
       loginSessionService.logoutUser();
@@ -41,9 +41,9 @@ public class UserApiController {
   }
 
   @PatchMapping
-  @CheckUserProcess
+  @CheckLoginAndResult
   public ResponseEntity<String> updateUser(@RequestBody UserChangeRequest userChangeRequest) {
-      userServiceImpl.updateUserInfo(userChangeRequest, loginSessionService.getCurrentUserId());
+      userServiceImpl.updateUser(userChangeRequest, loginSessionService.getCurrentUserId());
     return RESPONSE_OK;
   }
 }

@@ -6,6 +6,7 @@ package com.project.catcaring.service.user;
  */
 
 public interface LoginService {
+
   void loginUser(Long userId);
   void logoutUser();
   Long getCurrentUserId();

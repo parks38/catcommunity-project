@@ -1,6 +1,6 @@
 package com.project.catcaring.controller;
 
-import static com.project.catcaring.handler.HttpResponses.*;
+import static com.project.catcaring.error.HttpResponses.*;
 
 import com.project.catcaring.dto.post.PostInfoRequest;
 import com.project.catcaring.service.user.LoginSessionService;

@@ -1,13 +1,10 @@
 package com.project.catcaring.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.project.catcaring.domain.user.Authority;
 import com.project.catcaring.dto.post.PostInfoRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Builder
 public class Post {
@@ -22,7 +19,7 @@ public class Post {
   private final LocalDateTime modifiedAt;
   private final PostStatus status;
   private final List<Tag> tagList;
-  private final Location location;
+  private final Address location;
 
   public enum PostStatus {
     CREATED, DELETED, MODIFIED
