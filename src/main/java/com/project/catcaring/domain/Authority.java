@@ -1,4 +1,4 @@
-package com.project.catcaring.domain.user;
+package com.project.catcaring.domain;
 
 public enum Authority {
   ADMIN,
@@ -8,9 +8,4 @@ public enum Authority {
   SOCIETY_MEM,
   USER,
   ALL
-
-
-
-
-
 }

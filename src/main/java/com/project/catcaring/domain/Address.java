@@ -1,15 +1,14 @@
 package com.project.catcaring.domain;
 
-import com.project.catcaring.domain.user.Authority;
-import com.project.catcaring.domain.user.User.Address;
+import com.project.catcaring.domain.User.Location;
 import lombok.Builder;
-import lombok.Getter;
 
 @Builder
-public class Location {
+public class Address {
+
   private final Long id;
   private final Long postId;
-  private final Address location;
+  private final Location location;
   private final String locationDetail;
   private final Authority authorityCode;
 }
