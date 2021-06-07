@@ -2,6 +2,7 @@ package com.project.catcaring.aop.aspect;
 
 import com.project.catcaring.error.LoginErrorException;
 import com.project.catcaring.error.ProcessErrorException;
+import com.project.catcaring.service.user.LoginService;
 import com.project.catcaring.service.user.LoginSessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ import org.springframework.web.client.HttpClientErrorException;
 @Slf4j
 public class UserLoginAspect {
 
-  private final LoginSessionService loginSessionService;
+  private final LoginService loginSessionService;
 
   @Around("@annotation(com.project.catcaring.aop.annotation.CheckLoginAndResult)")
   public Object checkLoginAndProcessResult(ProceedingJoinPoint joinPoint) throws HttpClientErrorException {

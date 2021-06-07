@@ -44,7 +44,7 @@
     where id = #{userId}
   </update>
 
-  <update id = "updateUser" resultMap="UserInfo">
+  <update id = "updateUser" parameterType= "com.project.catcaring.domain.User">
     update user set
     full_name = #{fullName}, password = #{password},
     location = #{location}, updated_at = NOW()

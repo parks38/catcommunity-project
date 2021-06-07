@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
@@ -35,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers("/auth/**", "/posts/**", "/", "/comment/**" ,"/users/**", "/mappers/**")
+        .antMatchers("/auth/**", "/posts/**", "/", "/comments/**" ,"/users/**", "/mappers/**")
         .permitAll()
         .anyRequest()
         .authenticated();
