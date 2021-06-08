@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
   private final UserMapper userMapper;
 
   @Override
+  @Transactional
   public void createUser(UserInfoRequest userInfoRequest) {
     if (isUniqueUsername(userInfoRequest.getUsername())) {
       throw new DuplicateIdException();
