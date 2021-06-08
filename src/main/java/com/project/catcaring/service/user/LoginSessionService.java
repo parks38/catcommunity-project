@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class LoginSessionService implements LoginService{
 
   private final HttpSession session;
-  private static final String USER_ID = "USER_ID";
+  private final String USER_ID = "USER_ID";
 
   @Override
   public void loginUser(Long userId) {

@@ -2,8 +2,8 @@ package com.project.catcaring.aop.aspect;
 
 import com.project.catcaring.error.LoginErrorException;
 import com.project.catcaring.error.ProcessErrorException;
+import com.project.catcaring.error.UserIdMistmatchException;
 import com.project.catcaring.service.user.LoginService;
-import com.project.catcaring.service.user.LoginSessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,11 +18,11 @@ import org.springframework.web.client.HttpClientErrorException;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class UserLoginAspect {
+public class UserPostCheckAspect {
 
   private final LoginService loginSessionService;
 
-  @Around("@annotation(com.project.catcaring.aop.annotation.CheckLoginAndResult)")
+  @Around("@annotation(com.project.catcaring.aop.annotation.CheckUserLoginAndPostMatch)")
   public Object checkLoginAndProcessResult(ProceedingJoinPoint joinPoint) throws HttpClientErrorException {
     Long currentUserId = loginSessionService.getCurrentUserId();
 
@@ -38,18 +38,7 @@ public class UserLoginAspect {
       return processResult;
     } catch (Throwable throwable) {
       log.info(" ===== 작업 중 오류가 발생했습니다. ===== ");
-      throw new ProcessErrorException();
+      throw new UserIdMistmatchException();
     }
-  }
-
-  @Before("@annotation(com.project.catcaring.aop.annotation.CheckLogin)")
-  public void checkLogin() throws HttpClientErrorException {
-    Long currentUserId = loginSessionService.getCurrentUserId();
-
-    if (currentUserId == null) {
-      log.info(" ===== 회원이 로그인이 필요합니다. ===== ");
-      throw new LoginErrorException(HttpStatus.UNAUTHORIZED);
-    }
-    log.info(" ===== 회원이 로그인 되어 있는 상태입니다 ===== ");
   }
 }
