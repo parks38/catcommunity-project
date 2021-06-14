@@ -22,4 +22,5 @@ public interface PostMapper {
   void updatePostLocation(PostUpdateInfo postLocationUpdate);
 
   List<PostListInfo> findAllPosts(PageRequest page);
+  boolean isExistingPost(Long postId);
 }

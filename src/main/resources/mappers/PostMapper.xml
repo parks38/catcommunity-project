@@ -73,7 +73,7 @@
     orders limit #{size} offset #{offset}
   </select>
 
-  <select id="existingPost" resultType="boolean">
+  <select id="isExistingPost" resultType="boolean">
     select exists(select 1 from post where id = #{postId})
   </select>
 </mapper>
