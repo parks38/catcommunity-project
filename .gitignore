@@ -23,5 +23,5 @@
 hs_err_pid*
 
 # Folders
-.gradle/
-.idea/
+**/.gradle/
+**/.idea/
