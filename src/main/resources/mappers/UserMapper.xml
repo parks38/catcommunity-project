@@ -40,11 +40,11 @@
 
   <update id = "deleteUser">
     update user set
-    status = 'DELETE', updated_at = NOW()
+    status = 'DELETED', updated_at = NOW()
     where id = #{userId}
   </update>
 
-  <update id = "updateUser" parameterType= "com.project.catcaring.domain.User">
+  <update id = "updateUser">
     update user set
     full_name = #{fullName}, password = #{password},
     location = #{location}, updated_at = NOW()
