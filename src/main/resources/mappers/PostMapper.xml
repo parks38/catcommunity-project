@@ -31,10 +31,11 @@
     VALUES (#{postId}, #{tagName})
   </insert>
 
-  <delete id="deletePost" parameterType="Long">
-    DELETE FROM post
+  <update id="deletePost" parameterType="Long">
+    UPDATE post SET
+    status = 'DELETED'
     WHERE id = #{postId} AND user_id = #{userId}
-  </delete>
+  </update>
 
   <update id="updatePostContent" parameterType="com.project.catcaring.dto.post.PostUpdateInfo">
     update post set
