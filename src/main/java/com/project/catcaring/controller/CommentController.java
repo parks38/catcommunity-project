@@ -2,19 +2,13 @@ package com.project.catcaring.controller;
 
 import static com.project.catcaring.error.HttpResponses.RESPONSE_OK;
 
-import com.project.catcaring.aop.annotation.CheckLoginAndResult;
-import com.project.catcaring.aop.annotation.CheckUserLoginAndPostMatch;
+import com.project.catcaring.aop.annotation.CheckLogin;
 import com.project.catcaring.aop.annotation.CurrentUserId;
 import com.project.catcaring.domain.Comment;
 import com.project.catcaring.dto.comment.CommentInfoRequest;
 import com.project.catcaring.service.CommentService;
-import com.project.catcaring.service.CommentServiceImpl;
-import com.project.catcaring.service.user.LoginSessionService;
-import com.project.catcaring.service.user.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,21 +25,21 @@ public class CommentController {
   private final CommentService commentService;
 
   @PostMapping("/{postId}")
-  @CheckLoginAndResult
+  @CheckLogin
   public ResponseEntity<String> saveComment(@RequestBody @NonNull CommentInfoRequest commentInfoRequest, @PathVariable Long postId, @CurrentUserId Long userId) {
     commentService.saveComment(Comment.generate(commentInfoRequest, postId, 0L, userId), postId);
     return RESPONSE_OK;
   }
 
   @PostMapping("/{postId}/{parentId}")
-  @CheckLoginAndResult
+  @CheckLogin
   public ResponseEntity<String> saveNestedComment(@RequestBody @NonNull CommentInfoRequest commentInfoRequest, @PathVariable Long postId, @PathVariable Long parentId, @CurrentUserId Long userId) {
     commentService.saveNestedComment(Comment.generate(commentInfoRequest, postId, parentId, userId), parentId);
     return RESPONSE_OK;
   }
 
   @DeleteMapping("/{commentId}")
-  @CheckLoginAndResult
+  @CheckLogin
   public ResponseEntity<String> deleteComment(@PathVariable Long commentId, @CurrentUserId Long userId) {
     commentService.deleteComment(commentId, userId);
     return RESPONSE_OK;
