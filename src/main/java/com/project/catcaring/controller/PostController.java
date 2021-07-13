@@ -10,6 +10,7 @@ import com.project.catcaring.dto.post.PostUpdateRequest;
 import com.project.catcaring.service.PostServiceImpl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class PostController {
   @PostMapping
   @CheckLogin
   public ResponseEntity<String> savePost(@RequestBody @NonNull PostInfoRequest postInfoRequest, @CurrentUserId Long currentUserId) {
+    System.out.println(StringEscapeUtils.unescapeHtml4(postInfoRequest.getTitle()));
     postService.savePost(postInfoRequest, currentUserId);
     return RESPONSE_OK;
   }
