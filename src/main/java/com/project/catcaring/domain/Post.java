@@ -48,4 +48,7 @@ public class Post {
   public enum PostStatus {
     CREATED, DELETED, MODIFIED
   }
+
+  // List<Post> - List<Comment>
+  // mapper 통해서 가져오기 !
 }
