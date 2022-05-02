@@ -21,6 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+* USER CONTROLLER 
+유저 로그인 상태와 가입
+@author suna.park
+**/
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
