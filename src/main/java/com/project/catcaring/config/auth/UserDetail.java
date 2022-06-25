@@ -16,7 +16,7 @@ public class UserDetail implements UserDetails {
   public UserDetail(User user) {
     this.user = user;
     this.authorities = new ArrayList<>();
-    authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getMemberShipStatus()));
+    authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getUserStatus()));
   }
 
   @Override

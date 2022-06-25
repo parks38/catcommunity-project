@@ -7,6 +7,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class UserInfoResponse {
-  public final User user;
 
+  public final User user;
 }
