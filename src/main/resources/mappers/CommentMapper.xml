@@ -17,6 +17,13 @@
     VALUES (#{postId}, #{commentParentId},#{userId}, #{comment}, #{status}, NOW())
   </insert>
 
-  <delete id="deleteComment" parameterType="Long">
-  </delete>
+  <update id="deleteComment" parameterType="Long">
+    UPDATE comment SET status = 'DELETED'
+    WHERE (id =  #{commentId} and user_id = #{userId})
+       OR comment_parent = #{commentId};
+  </update>
+
+  <select id="viewComments" parameterType="Long" resultType="com.project.catcaring.domain.Comment">
+    SELECT * FROM comment WHERE post_id = #{postId} AND status != 'DELETED'
+  </select>
 </mapper>

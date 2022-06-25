@@ -3,8 +3,6 @@ package com.project.catcaring.controller;
 import static com.project.catcaring.error.HttpResponses.*;
 
 import com.project.catcaring.aop.annotation.CheckLogin;
-import com.project.catcaring.aop.annotation.CheckLoginAndResult;
-import com.project.catcaring.aop.annotation.CheckUserLoginAndPostMatch;
 import com.project.catcaring.aop.annotation.CurrentUserId;
 import com.project.catcaring.dto.post.PageRequest;
 import com.project.catcaring.dto.post.PostInfoRequest;
@@ -37,14 +35,14 @@ public class PostController {
   }
 
   @DeleteMapping("/{postId}")
-  @CheckUserLoginAndPostMatch
+  @CheckLogin
   public ResponseEntity<String> deletePost(@PathVariable Long postId, @CurrentUserId Long currentUserId) {
     postService.deletePost(postId, currentUserId);
     return RESPONSE_OK;
   }
 
   @PatchMapping("/{postId}")
-  @CheckUserLoginAndPostMatch
+  @CheckLogin
   public ResponseEntity<String> updatePost(@RequestBody PostUpdateRequest postUpdateRequest, @PathVariable Long postId, @CurrentUserId Long currentUserId) {
     postService.updatePost(postUpdateRequest, postId, currentUserId);
     return RESPONSE_OK;
