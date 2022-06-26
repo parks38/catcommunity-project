@@ -40,7 +40,7 @@
 
   <update id = "deleteUser">
     update user set
-    status = 'DELETE', updated_at = NOW()
+    status = 'DELETED', updated_at = NOW()
     where id = #{userId}
   </update>
 
