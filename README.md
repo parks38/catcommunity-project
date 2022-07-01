@@ -13,6 +13,7 @@
 #### 💻 개발 환경
 
 Java, Spring Boot, Gradle, MySQL, Mybatis
+- Swagger API 작성
 
 ### ⛓️ Repo 원본 Link ###
 - PR/ commit message 확인 : https://github.com/f-lab-edu/cat-caring-community
