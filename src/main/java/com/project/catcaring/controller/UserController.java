@@ -45,6 +45,13 @@ public class UserController {
         return RESPONSE_CREATED;
     }
 
+    /**
+     * 사용자 로그인
+     *
+     * @param userLoginRequest
+     * @return
+     */
+    @ApiOperation(value = "로그인")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody @NonNull UserLoginRequest userLoginRequest) {
         Optional<User> user = userServiceImpl
@@ -56,6 +63,12 @@ public class UserController {
         throw new LoginErrorException(HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * 사용자 로그아웃
+     *
+     * @return
+     */
+    @ApiOperation(value = "로그아웃")
     @GetMapping("/logout")
     @CheckLogin
     public ResponseEntity<String> logout() {
