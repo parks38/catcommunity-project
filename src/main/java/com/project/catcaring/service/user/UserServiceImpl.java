@@ -16,30 +16,41 @@ public class UserServiceImpl implements UserService {
 
   private final UserMapper userMapper;
 
+  /**
+   *
+   * @param userInfoRequest
+   */
   @Override
   @Transactional
   public void createUser(UserInfoRequest userInfoRequest) {
+
+    // username unique 확인
     if (isUniqueUsername(userInfoRequest.getUsername())) {
       throw new DuplicateIdException();
     }
+
     userMapper.insertUser(User.generate(userInfoRequest));
   }
 
   @Transactional(readOnly = true)
-  boolean isUniqueUsername(String username) {
+  public boolean isUniqueUsername(String username) {
     return userMapper.isUniqueUsername(username);
   }
 
   @Override
   @Transactional(readOnly = true)
   public Optional<User> login (String username, String password) {
+
     Optional<User> currentUser = Optional.ofNullable(userMapper.findByUsername(username));
+
     return checkPassword(password, currentUser);
   }
 
   private Optional<User> checkPassword(String password, Optional<User> currentUser) {
+
     if (currentUser.isPresent()) {
       boolean comparePassword = BCrypt.checkpw(password, currentUser.get().getPassword());
+
       if (comparePassword) {
         return currentUser;
       }
