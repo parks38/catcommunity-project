@@ -41,7 +41,9 @@ public class UserController {
     @ApiOperation(value = "가입하기", notes = "가입하기")
     @PostMapping
     public ResponseEntity<String> signUp(@RequestBody @NonNull UserInfoRequest userInfoRequest) {
+
         userServiceImpl.createUser(userInfoRequest);
+
         return RESPONSE_CREATED;
     }
 
@@ -56,10 +58,12 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody @NonNull UserLoginRequest userLoginRequest) {
         Optional<User> user = userServiceImpl
             .login(userLoginRequest.getUsername(), userLoginRequest.getPassword());
+
         if (user.isPresent()) {
             loginSessionService.loginUser(user.get().getId());
             return RESPONSE_OK;
         }
+
         throw new LoginErrorException(HttpStatus.NOT_FOUND);
     }
 
@@ -72,7 +76,9 @@ public class UserController {
     @GetMapping("/logout")
     @CheckLogin
     public ResponseEntity<String> logout() {
+
         loginSessionService.logoutUser();
+
         return RESPONSE_OK;
     }
 }

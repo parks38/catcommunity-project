@@ -33,6 +33,12 @@ public class User {
   private final LocalDateTime createdAt;
   private final LocalDateTime updatedAt;
 
+  /**
+   * 유저 생성
+   *
+   * @param userInfoRequest
+   * @return
+   */
   public static User generate(UserInfoRequest userInfoRequest) {
     return User.builder().username(userInfoRequest.getUsername())
         .password(PASSWORD_ENCODER.encode(userInfoRequest.getPassword()))
@@ -44,6 +50,12 @@ public class User {
         .build();
   }
 
+  /**
+   * 유저 수정
+   * @param userChangeRequest
+   * @param userId
+   * @return
+   */
   public static User modify(UserChangeRequest userChangeRequest, Long userId) {
     return User.builder()
         .id(userId)
@@ -64,11 +76,17 @@ public class User {
     DELETED
   }
 
+  /**
+   * 사용자 상태
+   */
   public enum Status {
 
     MEMBER, ADMIN, DELETED
   }
 
+  /**
+   * 자치구
+   */
   public enum Location {
 
     DOBONG, DONGDAEMUN, DONGJAK,
