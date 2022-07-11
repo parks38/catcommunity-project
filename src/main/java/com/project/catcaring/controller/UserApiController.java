@@ -7,6 +7,8 @@ import com.project.catcaring.domain.User;
 import com.project.catcaring.dto.user.request.UserChangeRequest;
 import com.project.catcaring.service.user.LoginSessionService;
 import com.project.catcaring.service.user.UserApiServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,29 +24,39 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Api(value = "/users", tags = "사용자 정보")
 public class UserApiController {
 
-  private final UserApiServiceImpl userServiceImpl;
-  private final LoginSessionService loginSessionService;
+    private final UserApiServiceImpl userServiceImpl;
+    private final LoginSessionService loginSessionService;
 
-  @GetMapping
-  @CheckLogin
-  public ResponseEntity<User> getUserInfo() {
-    return ResponseEntity.ok(userServiceImpl.getUserInfo(loginSessionService.getCurrentUserId()));
-  }
+    @GetMapping
+    @CheckLogin
+    @ApiOperation(value="사용자 정보 불러오기")
+    public ResponseEntity<User> getUserInfo() {
 
-  @DeleteMapping
-  @CheckLogin
-  public ResponseEntity<String> deleteUser() {
-      userServiceImpl.deleteUser(loginSessionService.getCurrentUserId());
-      loginSessionService.logoutUser();
-      return new ResponseEntity<>("user delete completed", HttpStatus.NO_CONTENT);
-  }
+        return ResponseEntity
+            .ok(userServiceImpl.getUserInfo(loginSessionService.getCurrentUserId()));
+    }
 
-  @PatchMapping
-  @CheckLogin
-  public ResponseEntity<String> updateUser(@RequestBody UserChangeRequest userChangeRequest) {
-      userServiceImpl.updateUser(userChangeRequest, loginSessionService.getCurrentUserId());
-    return RESPONSE_OK;
-  }
+    @DeleteMapping
+    @CheckLogin
+    @ApiOperation(value="사용자 탈퇴")
+    public ResponseEntity<String> deleteUser() {
+
+        userServiceImpl.deleteUser(loginSessionService.getCurrentUserId());
+        loginSessionService.logoutUser();
+
+        return new ResponseEntity<>("user delete completed", HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping
+    @CheckLogin
+    @ApiOperation(value= "사용자 정보 수정")
+    public ResponseEntity<String> updateUser(@RequestBody UserChangeRequest userChangeRequest) {
+
+        userServiceImpl.updateUser(userChangeRequest, loginSessionService.getCurrentUserId());
+
+        return RESPONSE_OK;
+    }
 }
