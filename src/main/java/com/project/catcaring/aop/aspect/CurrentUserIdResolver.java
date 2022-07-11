@@ -14,16 +14,20 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @RequiredArgsConstructor
 public class CurrentUserIdResolver implements HandlerMethodArgumentResolver {
 
-  private final LoginService loginService;
+    private final LoginService loginService;
 
-  @Override
-  public boolean supportsParameter(MethodParameter parameter) {
-    return parameter.hasParameterAnnotation(CurrentUserId.class);
-  }
+    @Override
+    public boolean supportsParameter(MethodParameter parameter) {
 
-  @Override
-  public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-      NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-    return loginService.getCurrentUserId();
-  }
+        return parameter.hasParameterAnnotation(CurrentUserId.class);
+    }
+
+    @Override
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+
+        NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+
+        return loginService.getCurrentUserId();
+    }
 }
+

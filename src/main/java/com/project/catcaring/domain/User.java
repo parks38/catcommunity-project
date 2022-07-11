@@ -18,84 +18,87 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class User {
 
-  private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
-  private final Long id;
-  private final String username;
-  private final String password;
-  private final String email;
-  private final String fullName;
-  private final Location location;
-  private final MemberShip memberShipStatus;
-  private final String accessToken;
-  private final String userIntro;
-  private final Status userStatus;
-  private final LocalDateTime createdAt;
-  private final LocalDateTime updatedAt;
+    private final Long id;
+    private final String username;
+    private final String password;
+    private final String email;
+    private final String fullName;
+    private final Location location;
+    private final MemberShip memberShipStatus;
+    private final String accessToken;
+    private final String userIntro;
+    private final Status userStatus;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
-  /**
-   * 유저 생성
-   *
-   * @param userInfoRequest
-   * @return
-   */
-  public static User generate(UserInfoRequest userInfoRequest) {
-    return User.builder().username(userInfoRequest.getUsername())
-        .password(PASSWORD_ENCODER.encode(userInfoRequest.getPassword()))
-        .fullName(userInfoRequest.getFullName())
-        .email(userInfoRequest.getEmail())
-        .location(userInfoRequest.getLocation())
-        .memberShipStatus(MemberShip.DEFAULT_MEMBER)
-        .userStatus(Status.MEMBER)
-        .build();
-  }
+    /**
+     * 유저 생성
+     *
+     * @param userInfoRequest
+     * @return
+     */
+    public static User generate(UserInfoRequest userInfoRequest) {
 
-  /**
-   * 유저 수정
-   * @param userChangeRequest
-   * @param userId
-   * @return
-   */
-  public static User modify(UserChangeRequest userChangeRequest, Long userId) {
-    return User.builder()
-        .id(userId)
-        .password(PASSWORD_ENCODER.encode(userChangeRequest.getPassword()))
-        .fullName(userChangeRequest.getFullName())
-        .location(userChangeRequest.getLocation()).build();
-  }
+        return User.builder().username(userInfoRequest.getUsername())
+            .password(PASSWORD_ENCODER.encode(userInfoRequest.getPassword()))
+            .fullName(userInfoRequest.getFullName())
+            .email(userInfoRequest.getEmail())
+            .location(userInfoRequest.getLocation())
+            .memberShipStatus(MemberShip.DEFAULT_MEMBER)
+            .userStatus(Status.MEMBER)
+            .build();
+    }
 
-  public enum MemberShip {
+    /**
+     * 유저 수정
+     *
+     * @param userChangeRequest
+     * @param userId
+     * @return
+     */
+    public static User modify(UserChangeRequest userChangeRequest, Long userId) {
 
-    ADMIN,
-    LEADER_MEM,
-    BOARD_MEM,
-    ACTIVE_MEM,
-    SOCIETY_MEM,
-    DEFAULT_MEMBER,
-    ALL,
-    DELETED
-  }
+        return User.builder()
+            .id(userId)
+            .password(PASSWORD_ENCODER.encode(userChangeRequest.getPassword()))
+            .fullName(userChangeRequest.getFullName())
+            .location(userChangeRequest.getLocation()).build();
+    }
 
-  /**
-   * 사용자 상태
-   */
-  public enum Status {
+    public enum MemberShip {
 
-    MEMBER, ADMIN, DELETED
-  }
+        ADMIN,
+        LEADER_MEM,
+        BOARD_MEM,
+        ACTIVE_MEM,
+        SOCIETY_MEM,
+        DEFAULT_MEMBER,
+        ALL,
+        DELETED
+    }
 
-  /**
-   * 자치구
-   */
-  public enum Location {
+    /**
+     * 사용자 상태
+     */
+    public enum Status {
 
-    DOBONG, DONGDAEMUN, DONGJAK,
-    EUNPYEONG,
-    GANGBUK, GANGDONG,  GANGNAM, GANGSEO, GEUMCHEON, GURO, GWANAK, GWANGJIN,
-    JONGNO, JUNG, JUNGNANG,
-    MAPO,
-    NOWON,
-    SEOCHO, SEODAEMUN, SEONGBUK, SEONGDONG, SONGPA,
-    YANGCHEON, YEONGDEUNGPO, YONGSAN
-  }
+        MEMBER, ADMIN, DELETED
+    }
+
+    /**
+     * 자치구
+     */
+    public enum Location {
+
+        DOBONG, DONGDAEMUN, DONGJAK,
+        EUNPYEONG,
+        GANGBUK, GANGDONG, GANGNAM, GANGSEO, GEUMCHEON, GURO, GWANAK, GWANGJIN,
+        JONGNO, JUNG, JUNGNANG,
+        MAPO,
+        NOWON,
+        SEOCHO, SEODAEMUN, SEONGBUK, SEONGDONG, SONGPA,
+        YANGCHEON, YEONGDEUNGPO, YONGSAN
+    }
 }
