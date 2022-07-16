@@ -12,7 +12,8 @@
 
 #### 💻 개발 환경
 
-Java, Spring Boot, Gradle, MySQL, Mybatis
+(Before) Java, Spring Boot, Gradle, MySQL, Mybatis
+(Refactoring) Java, Spring Boot, Gradle, MySQL, JPA
 - Swagger API 작성
 
 ### ⛓️ Repo 원본 Link ###
