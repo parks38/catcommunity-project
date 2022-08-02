@@ -2,39 +2,56 @@ package com.project.catcaring.domain;
 
 import com.project.catcaring.dto.user.request.UserChangeRequest;
 import com.project.catcaring.dto.user.request.UserInfoRequest;
-import com.project.catcaring.service.user.LoginSessionService;
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.jni.Address;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+/**
+ * 회원 (entity)
+ */
 @Getter
 @Builder
 @RequiredArgsConstructor
+@Entity(name = "User")
 public class User {
 
     private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Long id;
+
     private final String username;
+
     private final String password;
+
     private final String email;
+
     private final String fullName;
+
     private final Location location;
+
     private final MemberShip memberShipStatus;
+
     private final String accessToken;
+
     private final String userIntro;
+
     private final Status userStatus;
+
     private final LocalDateTime createdAt;
+
     private final LocalDateTime updatedAt;
 
     /**
-     * 유저 생성
+     * 회원 생성
      *
      * @param userInfoRequest
      * @return
@@ -52,7 +69,7 @@ public class User {
     }
 
     /**
-     * 유저 수정
+     * 회원 정보 수정
      *
      * @param userChangeRequest
      * @param userId
@@ -67,6 +84,9 @@ public class User {
             .location(userChangeRequest.getLocation()).build();
     }
 
+    /**
+     * 회원 등급 (Enum)
+     */
     public enum MemberShip {
 
         ADMIN,
@@ -80,7 +100,7 @@ public class User {
     }
 
     /**
-     * 사용자 상태
+     * 회원 상태 (Enum)
      */
     public enum Status {
 
@@ -88,7 +108,7 @@ public class User {
     }
 
     /**
-     * 자치구
+     * 자치구 (Enum)
      */
     public enum Location {
 

@@ -8,6 +8,8 @@ import com.project.catcaring.dto.post.PageRequest;
 import com.project.catcaring.dto.post.PostInfoRequest;
 import com.project.catcaring.dto.post.PostUpdateRequest;
 import com.project.catcaring.service.PostServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts")
+@Api(value="/posts", tags = "post")
 public class PostController {
 
   private final PostServiceImpl postService;
 
   @PostMapping
   @CheckLogin
+  @ApiOperation(value = "글 저장")
   public ResponseEntity<String> savePost(@RequestBody @NonNull PostInfoRequest postInfoRequest, @CurrentUserId Long currentUserId) {
+
     postService.savePost(postInfoRequest, currentUserId);
+
     return RESPONSE_OK;
   }
 

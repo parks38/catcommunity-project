@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 회원 기본 API (Controller)
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -33,7 +36,7 @@ public class UserController {
     private final LoginSessionService loginSessionService;
 
     /**
-     * 사용자 가입
+     * 회원 가입
      *
      * @param userInfoRequest
      * @return
@@ -48,7 +51,7 @@ public class UserController {
     }
 
     /**
-     * 사용자 로그인
+     * 회원 로그인
      *
      * @param userLoginRequest
      * @return
@@ -68,7 +71,7 @@ public class UserController {
     }
 
     /**
-     * 사용자 로그아웃
+     * 회원 로그아웃
      *
      * @return
      */
