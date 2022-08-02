@@ -2,100 +2,123 @@ package com.project.catcaring.domain;
 
 import com.project.catcaring.dto.user.request.UserChangeRequest;
 import com.project.catcaring.dto.user.request.UserInfoRequest;
-import com.project.catcaring.service.user.LoginSessionService;
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.jni.Address;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+/**
+ * 회원 (entity)
+ */
 @Getter
 @Builder
 @RequiredArgsConstructor
+@Entity(name = "User")
 public class User {
 
-  private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
-  private final Long id;
-  private final String username;
-  private final String password;
-  private final String email;
-  private final String fullName;
-  private final Location location;
-  private final MemberShip memberShipStatus;
-  private final String accessToken;
-  private final String userIntro;
-  private final Status userStatus;
-  private final LocalDateTime createdAt;
-  private final LocalDateTime updatedAt;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private final Long id;
 
-  /**
-   * 유저 생성
-   *
-   * @param userInfoRequest
-   * @return
-   */
-  public static User generate(UserInfoRequest userInfoRequest) {
-    return User.builder().username(userInfoRequest.getUsername())
-        .password(PASSWORD_ENCODER.encode(userInfoRequest.getPassword()))
-        .fullName(userInfoRequest.getFullName())
-        .email(userInfoRequest.getEmail())
-        .location(userInfoRequest.getLocation())
-        .memberShipStatus(MemberShip.DEFAULT_MEMBER)
-        .userStatus(Status.MEMBER)
-        .build();
-  }
+    private final String username;
 
-  /**
-   * 유저 수정
-   * @param userChangeRequest
-   * @param userId
-   * @return
-   */
-  public static User modify(UserChangeRequest userChangeRequest, Long userId) {
-    return User.builder()
-        .id(userId)
-        .password(PASSWORD_ENCODER.encode(userChangeRequest.getPassword()))
-        .fullName(userChangeRequest.getFullName())
-        .location(userChangeRequest.getLocation()).build();
-  }
+    private final String password;
 
-  public enum MemberShip {
+    private final String email;
 
-    ADMIN,
-    LEADER_MEM,
-    BOARD_MEM,
-    ACTIVE_MEM,
-    SOCIETY_MEM,
-    DEFAULT_MEMBER,
-    ALL,
-    DELETED
-  }
+    private final String fullName;
 
-  /**
-   * 사용자 상태
-   */
-  public enum Status {
+    private final Location location;
 
-    MEMBER, ADMIN, DELETED
-  }
+    private final MemberShip memberShipStatus;
 
-  /**
-   * 자치구
-   */
-  public enum Location {
+    private final String accessToken;
 
-    DOBONG, DONGDAEMUN, DONGJAK,
-    EUNPYEONG,
-    GANGBUK, GANGDONG,  GANGNAM, GANGSEO, GEUMCHEON, GURO, GWANAK, GWANGJIN,
-    JONGNO, JUNG, JUNGNANG,
-    MAPO,
-    NOWON,
-    SEOCHO, SEODAEMUN, SEONGBUK, SEONGDONG, SONGPA,
-    YANGCHEON, YEONGDEUNGPO, YONGSAN
-  }
+    private final String userIntro;
+
+    private final Status userStatus;
+
+    private final LocalDateTime createdAt;
+
+    private final LocalDateTime updatedAt;
+
+    /**
+     * 회원 생성
+     *
+     * @param userInfoRequest
+     * @return
+     */
+    public static User generate(UserInfoRequest userInfoRequest) {
+
+        return User.builder().username(userInfoRequest.getUsername())
+            .password(PASSWORD_ENCODER.encode(userInfoRequest.getPassword()))
+            .fullName(userInfoRequest.getFullName())
+            .email(userInfoRequest.getEmail())
+            .location(userInfoRequest.getLocation())
+            .memberShipStatus(MemberShip.DEFAULT_MEMBER)
+            .userStatus(Status.MEMBER)
+            .build();
+    }
+
+    /**
+     * 회원 정보 수정
+     *
+     * @param userChangeRequest
+     * @param userId
+     * @return
+     */
+    public static User modify(UserChangeRequest userChangeRequest, Long userId) {
+
+        return User.builder()
+            .id(userId)
+            .password(PASSWORD_ENCODER.encode(userChangeRequest.getPassword()))
+            .fullName(userChangeRequest.getFullName())
+            .location(userChangeRequest.getLocation()).build();
+    }
+
+    /**
+     * 회원 등급 (Enum)
+     */
+    public enum MemberShip {
+
+        ADMIN,
+        LEADER_MEM,
+        BOARD_MEM,
+        ACTIVE_MEM,
+        SOCIETY_MEM,
+        DEFAULT_MEMBER,
+        ALL,
+        DELETED
+    }
+
+    /**
+     * 회원 상태 (Enum)
+     */
+    public enum Status {
+
+        MEMBER, ADMIN, DELETED
+    }
+
+    /**
+     * 자치구 (Enum)
+     */
+    public enum Location {
+
+        DOBONG, DONGDAEMUN, DONGJAK,
+        EUNPYEONG,
+        GANGBUK, GANGDONG, GANGNAM, GANGSEO, GEUMCHEON, GURO, GWANAK, GWANGJIN,
+        JONGNO, JUNG, JUNGNANG,
+        MAPO,
+        NOWON,
+        SEOCHO, SEODAEMUN, SEONGBUK, SEONGDONG, SONGPA,
+        YANGCHEON, YEONGDEUNGPO, YONGSAN
+    }
 }
